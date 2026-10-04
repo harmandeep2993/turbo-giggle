@@ -1,0 +1,21 @@
+[project]
+name = "full-stack-practice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "harmandeep2993", email = "harmandeep2993@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.142.2",
+    "pydantic>=2.13.5",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+full-stack-practice = "full_stack_practice:main"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"
