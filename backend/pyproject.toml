@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.142.2",
+    "httpx2>=2.13.1",
     "pydantic>=2.13.5",
     "uvicorn>=0.54.0",
 ]
@@ -19,3 +20,14 @@ full-stack-practice = "full_stack_practice:main"
 [build-system]
 requires = ["uv_build>=0.12.8,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+]
+
+# Fixed: main.py lives in backend/, outside the package, so pytest could not
+# import it. This adds backend/ to the import path when tests run.
+[tool.pytest.ini_options]
+pythonpath = ["."]
