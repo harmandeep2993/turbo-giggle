@@ -4,9 +4,14 @@ from fastapi.testclient import TestClient
 
 # This import works because of the pythonpath setting added to pyproject.toml.
 from main import app
+from src.core.security import azure_scheme
 
 # TestClient calls the app directly, so the server does not need to be running.
 client = TestClient(app)
+
+# Skip real Entra ID login in tests: FastAPI calls this fake instead of
+# azure_scheme, so protected routes run without a Microsoft token.
+app.dependency_overrides[azure_scheme] = lambda: None
 
 
 # Fixed: functions now have two blank lines between them (one before).

@@ -24,6 +24,10 @@ class Settings(BaseSettings):
     # ALLOWED_ORIGINS='["http://localhost:5173"]'
     allowed_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 
+    tenant_id: str
+    api_client_id: str
+    frontend_client_id: str
+
     # Fixed: removed items_per_user because nothing uses it yet.
 
 
