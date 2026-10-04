@@ -53,7 +53,9 @@ def test_power():
 def test_power_zero_base_negative_exponent_returns_400():
     response = client.post("/power", json={"base": 0, "exponent": -1})
     assert response.status_code == 400
-    assert response.json()["detail"] == "Zero base with negative exponent is not allowed."
+    assert (
+        response.json()["detail"] == "Zero base with negative exponent is not allowed."
+    )
 
 
 def test_power_overflow_returns_400():

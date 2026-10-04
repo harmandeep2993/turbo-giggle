@@ -4,14 +4,14 @@
 # service function directly. Endpoint tests live in test_api.py.
 
 import pytest
+from src.schemas.calculation import Operation
 
 # Fixed: was "from src.full_stack_practice...", which fails with
 # "No module named 'src'". src/ is only the folder; the package name is
 # full_stack_practice.
 # Fixed: CalculationRequest and CalculationResponse are no longer imported.
 # Service tests call the function directly and do not need schema objects.
-from services.calculation import perform_calculation
-from schemas.calculation import Operation
+from src.services.calculation import perform_calculation
 
 
 # Fixed: every test used to do the math itself (request.a + request.b) and

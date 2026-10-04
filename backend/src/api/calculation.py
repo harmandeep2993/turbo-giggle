@@ -2,14 +2,13 @@
 API endpoints for performing calculations and power operations.
 """
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
-from schemas.calculation import (
+from src.schemas.calculation import (
     CalculationRequest,
     CalculationResponse,
 )
-from services.calculation import perform_calculation
-from fastapi import HTTPException
+from src.services.calculation import perform_calculation
 
 router = APIRouter(tags=["calculation"])
 

@@ -4,8 +4,7 @@
 # itself (request.base ** request.exponent) without calling perform_power.
 
 import pytest
-
-from services.power import perform_power
+from src.services.power import perform_power
 
 
 def test_power():

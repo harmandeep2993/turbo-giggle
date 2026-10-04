@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from schemas.power import PowerRequest, PowerResponse
 
-from services.power import perform_power
+from src.schemas.power import PowerRequest, PowerResponse
+from src.services.power import perform_power
 
 router = APIRouter(tags=["power"])
 
