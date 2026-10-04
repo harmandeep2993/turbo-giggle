@@ -5,7 +5,7 @@
 
 import pytest
 
-from full_stack_practice.calculate.power import perform_power
+from services.power import perform_power
 
 
 def test_power():

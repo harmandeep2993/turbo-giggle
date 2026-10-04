@@ -10,8 +10,8 @@ import pytest
 # full_stack_practice.
 # Fixed: CalculationRequest and CalculationResponse are no longer imported.
 # Service tests call the function directly and do not need schema objects.
-from full_stack_practice.calculate.calculate import perform_calculation
-from full_stack_practice.schemas.calculation import Operation
+from services.calculation import perform_calculation
+from schemas.calculation import Operation
 
 
 # Fixed: every test used to do the math itself (request.a + request.b) and

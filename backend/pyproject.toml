@@ -1,5 +1,5 @@
 [project]
-name = "full-stack-practice"
+name = "cal-app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -13,20 +13,14 @@ dependencies = [
     "uvicorn>=0.54.0",
 ]
 
-[project.scripts]
-full-stack-practice = "full_stack_practice:main"
-
-[build-system]
-requires = ["uv_build>=0.12.8,<0.13.0"]
-build-backend = "uv_build"
-
 [dependency-groups]
 dev = [
     "httpx2>=2.13.1",
     "pytest>=9.1.1",
 ]
 
-# Fixed: main.py lives in backend/, outside the package, so pytest could not
-# import it. This adds backend/ to the import path when tests run.
+[tool.uv]
+package = false
+
 [tool.pytest.ini_options]
-pythonpath = ["."]
+pythonpath = ["src"]

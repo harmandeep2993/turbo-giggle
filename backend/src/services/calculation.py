@@ -4,7 +4,7 @@ This module contains a function for performing addition, subtraction, multiplica
 
 # Changed: was importing CalculationRequest and CalculationResponse, which were
 # never used here. The service only needs the Operation enum.
-from full_stack_practice.schemas.calculation import Operation
+from schemas.calculation import Operation
 
 
 # This is a "service": pure logic with no FastAPI code, so it can be tested on
