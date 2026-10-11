@@ -1,0 +1,117 @@
+/* === Design tokens === */
+:root {
+  --color-bg: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-text: #1f2328;
+  --color-muted: #59636e;
+  --color-primary: #0f6cbd;
+  --color-primary-text: #ffffff;
+  --color-border: #d0d7de;
+  --color-error: #c62828;
+  --color-success: #1b7f3b;
+
+  --font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-size: 1rem;
+  --font-size-title: 1.75rem;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+
+  --radius: 0.5rem;
+  --width-app: 28rem;
+}
+
+/* === Base === */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* === Layout === */
+.app {
+  max-width: var(--width-app);
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: var(--font-size-title);
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  color: var(--color-muted);
+}
+
+/* === Calculator form === */
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+input,
+select {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-sm);
+  font-size: var(--font-size);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+select {
+  flex: 0 0 auto;
+}
+
+/* === Buttons === */
+button {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size);
+  color: var(--color-primary-text);
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+button.secondary {
+  color: var(--color-primary);
+  background: transparent;
+  border: 1px solid var(--color-primary);
+}
+
+/* === Status messages === */
+.result {
+  margin: 0;
+  font-size: var(--font-size-title);
+  color: var(--color-success);
+}
+
+.error {
+  margin: 0;
+  color: var(--color-error);
+}
