@@ -1,0 +1,33 @@
+# Runs the backend and frontend containers together for local testing.
+# Azure Container Apps does not use this file; it deploys each image separately.
+#
+# Start (from the project root):
+#   docker compose --env-file frontend/.env.local up --build
+#
+# --env-file frontend/.env.local supplies the VITE_ values below at build time,
+# because Vite bakes them into the JavaScript and cannot read them at runtime.
+
+services:
+  backend:
+    build: ./backend
+    image: calc-api
+    # Runtime settings (tenant, client IDs, CORS) are read when the container starts.
+    env_file: backend/.env
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_TENANT_ID: ${VITE_TENANT_ID}
+        VITE_CLIENT_ID: ${VITE_CLIENT_ID}
+        VITE_API_SCOPE: ${VITE_API_SCOPE}
+        VITE_API_URL: ${VITE_API_URL}
+    image: calc-frontend
+    # The browser must use localhost:5173: it is the registered redirect URI
+    # and an allowed CORS origin, so nginx's port 80 is mapped to it.
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
