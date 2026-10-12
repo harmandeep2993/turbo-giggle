@@ -14,6 +14,10 @@ app = FastAPI(
     title=settings.app_name,
     description="API for performing calculations and power operations",
     version="1.0.0",
+    # API docs reveal endpoints and login settings, so only show them in debug (local) mode.
+    docs_url="/docs" if settings.debug else None,
+    redoc_url="/redoc" if settings.debug else None,
+    openapi_url="/openapi.json" if settings.debug else None,
     swagger_ui_oauth2_redirect_url="/docs/oauth2-redirect",
     swagger_ui_init_oauth={
         "usePkceWithAuthorizationCodeGrant": True,
