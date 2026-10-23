@@ -1,29 +1,106 @@
-/* === Design tokens === */
+/* === Design tokens (light) === */
 :root {
-  --color-bg: #f5f6f8;
+  color-scheme: light;
+
+  --color-bg: #e9ecf2;
   --color-surface: #ffffff;
-  --color-text: #1f2328;
-  --color-muted: #59636e;
-  --color-primary: #0f6cbd;
+  --color-surface-muted: #f4f6fa;
+  --color-text: #0f172a;
+  --color-muted: #64748b;
+  --color-border: #d8dee8;
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
   --color-primary-text: #ffffff;
-  --color-border: #d0d7de;
-  --color-error: #c62828;
-  --color-success: #1b7f3b;
+  --color-primary-soft: #dbeafe;
+  --color-error: #b91c1c;
+  --color-focus: #93c5fd;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 6%), 0 8px 24px rgb(15 23 42 / 8%);
+
+  /* Calculator body and keys, like a plastic desk calculator. */
+  --color-device: #2b2f36;
+  --color-device-edge: #1c1f24;
+  --color-device-label: #c7ccd6;
+  --color-device-label-muted: #8a909c;
+  --color-lcd: #c8d5b9;
+  --color-lcd-text: #1f2a1a;
+  --color-lcd-muted: #55624a;
+  --color-lcd-edge: #9aa78c;
+  --color-lcd-error: #8b1a1a;
+  --color-key: #f4f4f2;
+  --color-key-text: #1f2328;
+  --color-key-edge: #b9bcc2;
+  --color-key-function: #9aa1ad;
+  --color-key-function-edge: #6f7682;
+  --color-key-operator: #f59e0b;
+  --color-key-operator-edge: #b45309;
+  --color-key-operator-active: #fde68a;
+  --color-key-equals: #2563eb;
+  --color-key-equals-edge: #1e40af;
+  --color-key-light-text: #ffffff;
+  --shadow-device: 0 20px 40px rgb(0 0 0 / 30%), inset 0 1px 0 rgb(255 255 255 / 8%);
+  --shadow-lcd: inset 0 3px 6px rgb(0 0 0 / 25%);
 
   --font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Consolas", monospace;
+  --font-size-xs: 0.6875rem;
+  --font-size-sm: 0.8125rem;
   --font-size: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-key: 1.375rem;
   --font-size-title: 1.75rem;
+  --font-size-lcd: 2.75rem;
+  --font-weight-bold: 600;
+  --letter-spacing-label: 0.12em;
 
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
-  --space-lg: 2rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
 
-  --radius: 0.5rem;
-  --width-app: 28rem;
+  --radius-sm: 0.5rem;
+  --radius: 0.875rem;
+  --radius-device: 1.75rem;
+  --radius-key: 0.75rem;
+  --radius-full: 999px;
+  --size-avatar: 2.25rem;
+  --size-control: 2.75rem;
+  --size-key: 4rem;
+  --height-lcd-expression: 1.25rem;
+  --key-depth: 4px;
+  --width-app: 22rem;
+  --width-header: 60rem;
+  --border-width: 1px;
+  --focus-ring: 0 0 0 3px var(--color-focus);
+  --transition: 80ms ease;
+  --opacity-disabled: 0.6;
+}
+
+/* === Design tokens (dark) === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-bg: #0b1120;
+    --color-surface: #111827;
+    --color-surface-muted: #1f2937;
+    --color-text: #e5e7eb;
+    --color-muted: #94a3b8;
+    --color-border: #1f2937;
+    --color-primary: #3b82f6;
+    --color-primary-hover: #60a5fa;
+    --color-primary-soft: #1e3a8a;
+    --color-error: #f87171;
+    --color-focus: #1d4ed8;
+    --shadow-card: none;
+  }
 }
 
 /* === Base === */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: var(--font-family);
@@ -32,86 +109,323 @@ body {
   color: var(--color-text);
 }
 
-/* === Layout === */
-.app {
-  max-width: var(--width-app);
-  margin: var(--space-lg) auto;
-  padding: var(--space-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+h1,
+h2 {
+  margin: 0 0 var(--space-sm);
 }
 
 h1 {
-  margin-top: 0;
   font-size: var(--font-size-title);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* === Layout === */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: var(--width-app);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+}
+
+/* === Header === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: var(--width-header);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-primary-text);
 }
 
 .user {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: var(--space-sm);
-  margin-bottom: var(--space-md);
-  color: var(--color-muted);
+  min-width: 0;
 }
 
-/* === Calculator form === */
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+  border-radius: var(--radius-full);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.user-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* === Cards (sign-in page) === */
+.card {
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.card--center {
+  text-align: center;
+}
+
+/* === Buttons (header and sign-in) === */
+.button {
+  height: var(--size-control);
+  padding: 0 var(--space-md);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-bold);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.button--primary {
+  color: var(--color-primary-text);
+  background: var(--color-primary);
+}
+
+.button--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.button--ghost {
+  color: var(--color-text);
+  background: transparent;
+  border-color: var(--color-border);
+}
+
+.button--ghost:hover {
+  background: var(--color-surface-muted);
+}
+
+.button--wide {
+  width: 100%;
+  margin-top: var(--space-md);
+}
+
+/* === Calculator device === */
 .calculator {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-.row {
+.device {
+  padding: var(--space-lg);
+  background: var(--color-device);
+  border-bottom: var(--key-depth) solid var(--color-device-edge);
+  border-radius: var(--radius-device);
+  box-shadow: var(--shadow-device);
+}
+
+.device-top {
   display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+}
+
+.device-brand {
+  color: var(--color-device-label);
+  font-weight: var(--font-weight-bold);
+}
+
+.device-model {
+  color: var(--color-device-label-muted);
+}
+
+/* === LCD screen === */
+.lcd {
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-lg);
+  background: var(--color-lcd);
+  border: var(--border-width) solid var(--color-lcd-edge);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lcd);
+  color: var(--color-lcd-text);
+  font-family: var(--font-mono);
+  text-align: right;
+}
+
+.lcd-expression {
+  min-height: var(--height-lcd-expression);
+  font-size: var(--font-size-sm);
+  color: var(--color-lcd-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lcd-value {
+  font-size: var(--font-size-lcd);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* === Keypad === */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-sm);
 }
 
-input,
-select {
-  flex: 1;
-  min-width: 0;
-  padding: var(--space-sm);
-  font-size: var(--font-size);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-select {
-  flex: 0 0 auto;
-}
-
-/* === Buttons === */
-button {
-  padding: var(--space-sm) var(--space-md);
-  font-size: var(--font-size);
-  color: var(--color-primary-text);
-  background: var(--color-primary);
+.key {
+  height: var(--size-key);
+  font-family: var(--font-family);
+  font-size: var(--font-size-key);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-key-text);
+  background: var(--color-key);
   border: none;
-  border-radius: var(--radius);
+  border-bottom: var(--key-depth) solid var(--color-key-edge);
+  border-radius: var(--radius-key);
   cursor: pointer;
+  user-select: none;
+  transition: transform var(--transition), border-bottom-width var(--transition);
 }
 
-button:disabled {
-  opacity: 0.6;
+/* Pressing a key pushes it down, like a real button. */
+.key:active:not(:disabled) {
+  transform: translateY(var(--key-depth));
+  border-bottom-width: 0;
+}
+
+.key:disabled {
+  opacity: var(--opacity-disabled);
   cursor: wait;
 }
 
-button.secondary {
-  color: var(--color-primary);
+.key--function {
+  color: var(--color-key-light-text);
+  background: var(--color-key-function);
+  border-bottom-color: var(--color-key-function-edge);
+}
+
+.key--operator {
+  color: var(--color-key-light-text);
+  background: var(--color-key-operator);
+  border-bottom-color: var(--color-key-operator-edge);
+}
+
+/* The operator you just pressed stays lit until you type the next number. */
+.key--active {
+  color: var(--color-key-text);
+  background: var(--color-key-operator-active);
+}
+
+.key--equals {
+  color: var(--color-key-light-text);
+  background: var(--color-key-equals);
+  border-bottom-color: var(--color-key-equals-edge);
+}
+
+/* === History tape === */
+.tape {
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.tape-title {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-label);
+}
+
+.history {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-sm);
+  font-size: var(--font-size);
+  font-family: var(--font-mono);
+  color: var(--color-text);
   background: transparent;
-  border: 1px solid var(--color-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
 }
 
-/* === Status messages === */
-.result {
-  margin: 0;
-  font-size: var(--font-size-title);
-  color: var(--color-success);
+.history-item:hover {
+  background: var(--color-surface-muted);
 }
 
-.error {
-  margin: 0;
+/* === Status === */
+.status--error {
   color: var(--color-error);
+}
+
+/* === Small screens === */
+@media (max-width: 30rem) {
+  .user-name {
+    display: none;
+  }
+
+  .lcd-value {
+    font-size: var(--font-size-title);
+  }
+}
+
+/* Error text on the LCD needs a darker red to stay readable on the green screen. */
+.lcd .status--error {
+  color: var(--color-lcd-error);
 }
